@@ -17,7 +17,15 @@ A secure key management contract implemented in WebAssembly that provides:
 
 ### [key-gen binary](./key-gen/README.md)
 
-Binary tools for key generation and management in the ZkFHE environment.
+A utility binary for generating and managing secure keys in the ZkFHE environment. Features include:
+
+- Secure key generation and management infrastructure
+- Integration with GRPC node endpoints
+- Industry-standard encryption protocols
+- Isolated key spaces for execution environments
+- Configuration-based setup with TOML support
+
+For detailed installation, configuration, and security best practices, refer to the [key-gen documentation](./key-gen/README.md).
 
 ## Getting Started
 

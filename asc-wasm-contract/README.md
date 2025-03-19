@@ -17,7 +17,7 @@ Essentially, it's a Key Management System (KMS) that leverages blockchain techno
 > If you are not, We recommend you to use [Docker](https://www.docker.com/) to deploy the contract.  
 > Docker Docs are coming soon.
 
-1. Download the contract from the [ASC Wasm Contract](https://github.com/airchains-network/binhub/blob/main/asc-wasm-contract/asc.wasm) repository.
+1. Download the contract from the [binhub repo's release](https://github.com/airchains-network/binhub/releases/download/v0.0.0/asc.wasm).
 2. Deploy the contract
 3. Verify the contract
 
@@ -33,7 +33,7 @@ Essentially, it's a Key Management System (KMS) that leverages blockchain techno
 to download the contract, run the following command:
 
 ```bash
-wget https://github.com/airchains-network/binhub/blob/main/asc-wasm-contract/asc.wasm
+wget https://github.com/airchains-network/binhub/releases/download/v0.0.0/asc.wasm
 ```
 
 ### 2. Deploy the contract
