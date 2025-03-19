@@ -1,0 +1,16 @@
+# config.toml
+
+# GRPC Addresses (comma-separated)
+addresses = <node-gRPC-url>
+
+# Alice's mnemonic phrase (Use secure storage in production!)
+mnemonic_phrase = <mnemonic_phrase>
+
+# ASC contract address
+asc_contract = <asc_contract>
+
+# Path to RSA public key file (PEM format)
+rsa_public_key_path = <rsa_public_key_path>
+
+# secret_key_id
+secret_key_id = <secret_key_id>
