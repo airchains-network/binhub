@@ -1,10 +1,10 @@
 # Key Generation Binary
 
-A utility for generating cryptographic keys for secure execution environments.
+A utility for generating and managing secure keys for execution environments.
 
 ## Overview
 
-This binary facilitates the generation of cryptographic keys essential for your execution environment's security infrastructure. It implements RSA encryption and integrates with a Key Management System (KMS).
+This binary handles secure key generation and management for your execution environment, integrating with a robust key management infrastructure.
 
 ## System Requirements
 
@@ -14,7 +14,7 @@ This binary facilitates the generation of cryptographic keys essential for your 
 working-directory/
 ├── config/
 │   ├── config.toml    # Configuration file
-│   └── public_key.pem # RSA public key
+│   └── public_key.pem # Public key for encryption
 └── keygen            # Binary executable
 ```
 
@@ -38,38 +38,19 @@ mkdir -p config && cp public_key.pem config/public_key.pem
 
 Create a `config.toml` file in the `config` directory with the following parameters:
 
-| Parameter             | Description                                              | Required |
-| --------------------- | -------------------------------------------------------- | -------- |
-| `addresses`           | Array of GRPC node endpoints for network connectivity    | Yes      |
-| `mnemonic_phrase`     | HD wallet mnemonic for transaction signing               | Yes      |
-| `asc_contract`        | Smart contract address for ASC integration               | Yes      |
-| `rsa_public_key_path` | Path to RSA public key for identifier encryption         | Yes      |
-| `secret_key_id`       | Unique identifier that will be encrypted as KMS key name | Yes      |
+| Parameter             | Description                                  | Required |
+| --------------------- | -------------------------------------------- | -------- |
+| `addresses`           | GRPC node endpoints for network connectivity | Yes      |
+| `mnemonic_phrase`     | Mnemonic for transaction signing             | Yes      |
+| `asc_contract`        | Contract address for chain integration       | Yes      |
+| `rsa_public_key_path` | Path to the public key file                  | Yes      |
+| `secret_key_id`       | Unique identifier for your environment's key | Yes      |
 
-## Security Architecture
+## Security Notes
 
-### RSA Encryption & Key Management System (KMS)
-
-The system implements a two-layer security mechanism:
-
-1. **Secret Key Identifier Protection:**
-
-   - The user provides a secret key identifier
-   - This identifier is encrypted using RSA public key (`public_key.pem`)
-   - The encrypted identifier serves as a unique KMS key name
-
-2. **KMS Integration:**
-   - Each execution environment has its own KMS key
-   - The encrypted secret key identifier acts as the KMS key name
-   - Without knowing the original secret key identifier, attackers cannot:
-     - Identify the correct KMS key name
-     - Access the execution environment's KMS key
-
-This architecture ensures that:
-
-- Only authorized users with the correct secret key identifier can access specific execution environment keys
-- The relationship between execution environments and their KMS keys remains confidential
-- The system maintains secure key isolation between different execution environments
+- The system uses industry-standard encryption protocols
+- Each execution environment maintains its own isolated key space
+- Access to keys is strictly controlled through secure identifiers
 
 ## Usage
 
@@ -79,9 +60,9 @@ Execute the binary in your working directory:
 ./keygen
 ```
 
-## Security Considerations
+## Security Best Practices
 
-- Store the `config.toml` file securely
+- Keep your configuration files secure
 - Never share your mnemonic phrase
-- Keep your `secret_key_id` confidential as it's the key to accessing your execution environment's KMS key
-- Ensure proper permissions on the `config` directory
+- Maintain confidentiality of your `secret_key_id`
+- Use appropriate file permissions
