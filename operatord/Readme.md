@@ -100,14 +100,14 @@ Create a `.env` file in the root directory of the project with the following par
 >
 > **Mnemonic**
 >
-> Here the mnemonic is the fresh mnemonic which is gonna be used to deploy the contract.  
+> Here the mnemonic is the fresh mnemonic which is gonna be used to deploy the contract.
+>
 > > **Reason**
 > > Since the contracts address has to be computed based on the mnemonic, so we need to use the fresh mnemonic.
 >
 > **Network URL**
 >
 > Here you have to pass the rpc url of the network. eg `http://localhost:8545`
->
 
 ```env
 NETWORK_URL=
@@ -139,4 +139,30 @@ node deploy.js
 
 The contract will be deployed to the network, and the contract address will be displayed in the console.
 
+### 5. Update TFHE Executor Contract Address
 
+After deployment, update the `TFHE_EXECUTOR_CONTRACT_ADDRESS` using the value from `deployment_config.json`. The file contains the tfhe_executor_contract_address, which must be set before restarting the operator:
+
+```json
+{
+  "tfhe_executor_contract_address": "0x1234567890abcdef1234567890abcdef12345678"
+}
+```
+
+update the `TFHE_EXECUTOR_CONTRACT_ADDRESS` environment variable with the new address:
+
+```bash
+export TFHE_EXECUTOR_CONTRACT_ADDRESS=0x1234567890abcdef1234567890abcdef12345678
+```
+
+### 6. Restart the Operator
+
+After updating the `TFHE_EXECUTOR_CONTRACT_ADDRESS`, restart the operator to apply the changes:
+
+```bash
+operatord start --pruning=nothing --trace --log_level info \
+    --minimum-gas-prices=0.0001aether \
+    --json-rpc.gas-cap=50000000 \
+    --json-rpc.api eth,txpool,net,web \
+    --rpc.laddr tcp://
+```
